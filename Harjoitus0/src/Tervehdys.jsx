@@ -1,7 +1,7 @@
 import * as React from 'react'
  
 function Tervehdys({name}) {
-    console.log(`Nimi: ${name}`); //Selaimen konsoliin tulostuu Nimi: Ville
+    console.log(`Nimi: ${name}`);
     return(
       <p>Hei {name}!</p>
     )
