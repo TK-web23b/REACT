@@ -16,6 +16,10 @@ function App() {
     { nimi: "Facebook", url: "https://www.facebook.com" },
     { nimi: "GitHub", url: "https://www.github.com" }
   ];
+  const linkit = [
+    { nimi: "Google", url: "https://google.com" },
+    { nimi: "React", url: "https://react.dev" }
+  ];
 
   return (
     <>
@@ -28,7 +32,7 @@ function App() {
       <Tervehdys name="TK"/>
       <OpiskelijaTiedot opiskelija={opiskelija} />
       <Infolista taulukko={tiedot} />
-      <Linkkilista lista={links} />
+      <Linkkilista lista={linkit} />
       <Kayttajakortti nimi="TK" lista={tiedot} />
     </>
   )
