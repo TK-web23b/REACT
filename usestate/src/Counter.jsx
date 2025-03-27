@@ -1,24 +1,9 @@
 import * as React from 'react';
-
-function CountDisplay({ count }) {
-  return <h2>Count: {count}</h2>;
-}
-
-function IncreaseButton({ onClick }) {
-  return <button onClick={onClick}>Increase</button>;
-}
-
-function DecreaseButton({ onClick }) {
-  return <button onClick={onClick}>Decrease</button>;
-}
-
-function ResetButton({ onClick }) {
-  return <button onClick={onClick}>Reset</button>;
-}
-
-function DoubleIncreaseButton({ onClick }) {
-  return <button onClick={onClick}>Double Increase</button>;
-}
+import CountDisplay from './CountDisplay.jsx';
+import IncreaseButton from './IncreaseButton.jsx';
+import DecreaseButton from './DecreaseButton.jsx';
+import ResetButton from './ResetButton.jsx';
+import DoubleIncreaseButton from './DoubleIncreaseButton.jsx';
 
 function Counter() {
   const [count, setCount] = React.useState(0);
