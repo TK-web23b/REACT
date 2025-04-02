@@ -1,41 +1,52 @@
-import { useState } from 'react'
-
-import * as React from 'react'
-import Tervehdys from './Tervehdys.jsx'
-import OpiskelijaTiedot from './OpiskelijaTiedot';
-import Infolista from './infolista.jsx';
-import Linkkilista from './linkkilista.jsx';
-import Kayttajakortti from './Kayttajakortti.jsx';
+import React, { useState, useEffect } from 'react';
+import UserDetails from './UserDetails.jsx';
+import UserPosts from './UserPosts.jsx';
 
 function App() {
-  const [count, setCount] = React.useState(0)
-  const opiskelija = { nimi: "Toivo Kalliokoski", ika: 17, kurssi: "Ohjelmistokomponentit" };
-  const tiedot = ["React", "JavaScript", "CSS"];
-  const links = [
-    { nimi: "Google", url: "https://www.google.com" },
-    { nimi: "Facebook", url: "https://www.facebook.com" },
-    { nimi: "GitHub", url: "https://www.github.com" }
-  ];
-  const linkit = [
-    { nimi: "Google", url: "https://google.com" },
-    { nimi: "React", url: "https://react.dev" }
-  ];
+  const [userId, setUserId] = useState(1); 
+  const [userDetails, setUserDetails] = useState(null); 
+  const [userPosts, setUserPosts] = useState([]); 
+  const [error, setError] = useState(null); 
+
+  // Hakee käyttäjän tiedot ja postaukset
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        setError(null);
+
+        // Hae käyttäjän tiedot
+        const userResponse = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`);
+        if (!userResponse.ok) throw new Error(`HTTP-virhe käyttäjän tiedoissa: ${userResponse.status}`);
+        const userData = await userResponse.json();
+        setUserDetails(userData);
+
+        // Hae käyttäjän postaukset
+        const postsResponse = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
+        if (!postsResponse.ok) throw new Error(`HTTP-virhe postauksissa: ${postsResponse.status}`);
+        const postsData = await postsResponse.json();
+        setUserPosts(postsData);
+      } catch (err) {
+        setError(err.message);
+      }
+    }
+
+    fetchData();
+  }, [userId]); // Suoritetaan aina, kun userId muuttuu
 
   return (
-    <>
-      <h1>Hello world!</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+    <div>
+      <h1>Käyttäjän tiedot ja postaukset</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>} {/* Näytetään virhe, jos on */}
+
+      <div>
+        <button onClick={() => setUserId((prev) => Math.max(prev - 1, 1))}>Edellinen käyttäjä</button>
+        <button onClick={() => setUserId((prev) => prev + 1)}>Seuraava käyttäjä</button>
       </div>
-      <Tervehdys name="TK"/>
-      <OpiskelijaTiedot opiskelija={opiskelija} />
-      <Infolista taulukko={tiedot} />
-      <Linkkilista lista={linkit} />
-      <Kayttajakortti nimi="TK" lista={tiedot} />
-    </>
-  )
+
+      <UserDetails userDetails={userDetails} />
+      <UserPosts userPosts={userPosts} />
+    </div>
+  );
 }
 
-export default App
+export default App;
