@@ -7,7 +7,8 @@ function App() {
   return (
     <>
       <div>
-        <p className='tyyli'>Tyyli</p>
+        <p className='tyyli1'>Tyyli</p>
+        <p className='tyyli2'>jotain</p>
       </div>
     </>
   )
