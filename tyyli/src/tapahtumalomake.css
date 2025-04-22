@@ -1,0 +1,13 @@
+.tapahtumalomake {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tapahtumalomake input,
+.tapahtumalomake select,
+.tapahtumalomake button {
+  padding: 10px;
+  font-size: 16px;
+}

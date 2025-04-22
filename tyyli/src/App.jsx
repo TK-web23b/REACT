@@ -1,17 +1,26 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import TapahtumaLomake from './tapahtumalomake.jsx';
+import TapahtumaLista from './tapahtumalista.jsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [tapahtumat, setTapahtumat] = useState([]);
+
+  const lisaaTapahtuma = (uusiTapahtuma) => {
+    setTapahtumat([...tapahtumat, uusiTapahtuma]);
+  };
+
+  const poistaTapahtuma = (id) => {
+    setTapahtumat(tapahtumat.filter((tapahtuma) => tapahtuma.id !== id));
+  };
 
   return (
-    <>
-      <div>
-        <p className='tyyli1'>Tyyli</p>
-        <p className='tyyli2'>jotain</p>
-      </div>
-    </>
-  )
+    <div>
+      <h1>Tapahtumasovellus</h1>
+      <TapahtumaLomake lisaaTapahtuma={lisaaTapahtuma} />
+      <TapahtumaLista tapahtumat={tapahtumat} poistaTapahtuma={poistaTapahtuma} />
+    </div>
+  );
 }
 
-export default App
+export default App;

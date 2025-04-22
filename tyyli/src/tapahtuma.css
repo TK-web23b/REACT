@@ -1,0 +1,32 @@
+.tapahtuma {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 5px;
+  width: 200px;
+  text-align: center;
+}
+
+.tapahtuma.urheilu {
+  background-color: lightblue;
+}
+
+.tapahtuma.kulttuuri {
+  background-color: lightcoral;
+}
+
+.tapahtuma.muu {
+  background-color: lightgreen;
+}
+
+.tapahtuma button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.tapahtuma button:hover {
+  background-color: darkred;
+}
